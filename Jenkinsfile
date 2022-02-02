@@ -1,4 +1,3 @@
-#library "JenkinsLib"
 
 e2eRepo = 'dxp-e2e-automation'
 e2eBranch = common.getGitBranch()
