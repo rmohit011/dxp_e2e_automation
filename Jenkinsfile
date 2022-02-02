@@ -1,11 +1,4 @@
 
-e2eRepo = 'dxp-e2e-automation'
-e2eBranch = common.getGitBranch()
-libRepo = 'automation-lib'
-libBranch = 'master'
-totalRetries = 1
-e2eGuests = 4
-
 parameters = [
     string(defaultValue: 'https://qa1-sagar.decurtis.cloud', description: "Ship Link", name: 'shipLink', trim: true),
     string(defaultValue: 'https://qa1-shore.decurtis.cloud', description: "Shore Link", name: 'shoreLink', trim: true),
