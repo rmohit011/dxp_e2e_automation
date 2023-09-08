@@ -1,6 +1,5 @@
 node {
     def workspaceDir = pwd()
-    echo ${workspaceDir}
     // Define the directory to store Allure results and report
     def allureResultsDir = "${workspaceDir}/allure-results"
     def allureReportDir = "${workspaceDir}/allure-report"
