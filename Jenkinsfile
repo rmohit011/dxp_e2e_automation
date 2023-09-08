@@ -4,7 +4,7 @@ node {
                 choice(choices: ['2022', '2023', '2024'], description: 'select the year', name: 'date'), 
                 string(defaultValue: '8', description: 'enter no of res', name: 'no_of_res'),
                 string(defaultValue: 'dev', description: 'enter stage name', name: 'stage'),
-                pipelineTriggers([githubPush()])
+                pipelineTriggers([pollSCM('H/5 * * * *')])
                 ])])
     def parallelStages = [:]
         stage('SCM') {
