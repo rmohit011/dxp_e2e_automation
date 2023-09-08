@@ -44,8 +44,7 @@ node {
         docker.image('qnib/pytest:latest').inside {
            sh 'python -m venv myenv'
 
-       
-            sh 'myenv\Scripts\activate'
+    
 
             sh 'source myenv/bin/activate'
 
