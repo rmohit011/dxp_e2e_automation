@@ -47,7 +47,19 @@ node {
     
 
             sh '. myenv/bin/activate'
-            sh 'export XDG_CACHE_HOME="$HOME/.cache"'
+           
+            sh 'apt-get update && apt-get install -y openjdk-11-jre && \'
+    'apt-get clean && \'
+    'rm -rf /var/lib/apt/lists/* && \'
+    'wget -O allure.zip https://github.com/allure-framework/allure2/releases/download/2.14.0/allure-2.14.0.zip && \'
+    'unzip allure.zip && \'
+    'rm allure.zip && \'
+    'mv allure-2.14.0 /opt/allure && \'
+    'ln -s /opt/allure/bin/allure /usr/bin/allure'
+
+
+    sh 'pip install allure-pytest pytest'
+
             sh 'pip install --upgrade pip'
            sh 'pip install allure-pytest'
         // Replace with your test execution commands
