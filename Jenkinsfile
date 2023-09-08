@@ -42,8 +42,7 @@ node {
     parallel parallelStages
     stage('Test and Generate Allure Results') {
         docker.image('qnib/pytest:latest').inside {
-           sh 'pip install virtualenv'
-           sh 'python -m venv myenv'
+           sh 'virtualenv myenv'
 
     
 
