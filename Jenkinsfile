@@ -46,7 +46,7 @@ node {
 
     
 
-            sh 'source myenv/bin/activate'
+            sh '. myenv/bin/activate'
 
             sh 'pip install --upgrade pip'
            sh 'pip install allure-pytest'
