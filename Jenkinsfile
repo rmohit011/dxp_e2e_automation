@@ -3,9 +3,11 @@ node {
                 [booleanParam(defaultValue: true, description: 'Check the box if voyage active', name: 'isActive'), 
                 choice(choices: ['2022', '2023', '2024'], description: 'select the year', name: 'date'), 
                 string(defaultValue: '8', description: 'enter no of res', name: 'no_of_res'),
-                string(defaultValue: 'dev', description: 'enter stage name', name: 'stage'),
-                pipelineTriggers([pollSCM('H/5 * * * *')])
+                string(defaultValue: 'dev', description: 'enter stage name', name: 'stage')
                 ])])
+    triggers {
+        pollSCM('H/5 * * * *') // Schedule your polling interval here
+    }
     def parallelStages = [:]
         stage('SCM') {
             git branch: 'main', url: 'https://github.com/rmohit011/dxp_e2e_automation.git'
