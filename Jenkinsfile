@@ -47,7 +47,7 @@ node {
     
 
             sh '. myenv/bin/activate'
-            sh 'pip install --user --upgrade pip'
+            sh 'export XDG_CACHE_HOME="$HOME/.cache"'
             sh 'pip install --upgrade pip'
            sh 'pip install allure-pytest'
         // Replace with your test execution commands
