@@ -42,7 +42,6 @@ node {
     parallel parallelStages
     stage('Test and Generate Allure Results') {
         docker.image('qnib/pytest:latest').inside {
-           sh 'pip install --upgrade pip'
            sh 'pip install allure-pytest'
         // Replace with your test execution commands
         sh 'pytest --alluredir=${allureResultsDir}' // For example, if you're using pytest
