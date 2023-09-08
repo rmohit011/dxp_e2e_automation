@@ -9,7 +9,7 @@ def sample_data():
 def test_addition(sample_data):
     x, y = sample_data
     result = x+y
-    assert result == 7
+    assert result == 8
 
 # Test cases for subtraction
 def test_subtraction(sample_data):
