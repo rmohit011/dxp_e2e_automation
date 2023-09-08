@@ -41,17 +41,20 @@ node {
       }
     parallel parallelStages
     stage('Test and Generate Allure Results') {
+        docker.image('qnib/pytest:latest').inside {
         // Replace with your test execution commands
         sh 'pytest --alluredir=${allureResultsDir}' // For example, if you're using pytest
     }
-
+    }
     // Generate the Allure report
     stage('Generate Allure Report') {
+        docker.image('qnib/pytest:latest').inside {
         // Generate the Allure report from the results
         sh "allure generate ${allureResultsDir} -o ${allureReportDir}"
 
         // Archive the Allure report so that it can be accessed in Jenkins
         archiveArtifacts artifacts: "${allureReportDir}/*", allowEmptyArchive: true
+    }
     }
 
     // Publish Allure report using the Allure Jenkins Plugin (optional)
