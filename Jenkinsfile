@@ -5,9 +5,6 @@ node {
                 string(defaultValue: '8', description: 'enter no of res', name: 'no_of_res'),
                 string(defaultValue: 'dev', description: 'enter stage name', name: 'stage'),
                 ])])
-              pipelineTriggers([
-                    [$class: 'SCMTrigger', scmpoll_spec: 'H/2 * * * *']
-                            ])
               
     def parallelStages = [:]
         stage('SCM') {
