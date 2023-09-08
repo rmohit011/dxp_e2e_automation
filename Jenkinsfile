@@ -42,7 +42,16 @@ node {
     parallel parallelStages
     stage('Test and Generate Allure Results') {
         docker.image('qnib/pytest:latest').inside {
-           sh 'pip install --upgrade --user pip'
+           sh 'python -m venv myenv'
+
+        # Activate the virtual environment (on Windows)
+            sh 'myenv\Scripts\activate'
+
+        # Activate the virtual environment (on macOS and Linux)
+            sh 'source myenv/bin/activate'
+
+        # Upgrade pip within the virtual environment
+            sh 'pip install --upgrade pip'
            sh 'pip install allure-pytest'
         // Replace with your test execution commands
         sh 'pytest --alluredir=${allureResultsDir}' // For example, if you're using pytest
