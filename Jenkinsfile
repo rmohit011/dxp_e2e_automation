@@ -1,4 +1,14 @@
 node {
+    def workspaceDir = pwd()
+    echo ${workspaceDir}
+    // Define the directory to store Allure results and report
+    def allureResultsDir = "${workspaceDir}/allure-results"
+    def allureReportDir = "${workspaceDir}/allure-report"
+
+    // Clean the Allure report and results directory if it exists
+    sh "rm -rf ${allureResultsDir}"
+    sh "rm -rf ${allureReportDir}"
+    
     properties([parameters(
                 [booleanParam(defaultValue: true, description: 'Check the box if voyage active', name: 'isActive'), 
                 choice(choices: ['2022', '2023', '2024'], description: 'select the year', name: 'date'), 
@@ -31,6 +41,31 @@ node {
     }
       }
     parallel parallelStages
+    stage('Test and Generate Allure Results') {
+        // Replace with your test execution commands
+        sh 'pytest --alluredir=${allureResultsDir}' // For example, if you're using pytest
+    }
+
+    // Generate the Allure report
+    stage('Generate Allure Report') {
+        // Generate the Allure report from the results
+        sh "allure generate ${allureResultsDir} -o ${allureReportDir}"
+
+        // Archive the Allure report so that it can be accessed in Jenkins
+        archiveArtifacts artifacts: "${allureReportDir}/*", allowEmptyArchive: true
+    }
+
+    // Publish Allure report using the Allure Jenkins Plugin (optional)
+    stage('Publish Allure Report') {
+        allure([
+            includeProperties: false,
+            jdk: '',
+            properties: [],
+            reportBuildPolicy: 'ALWAYS',
+            results: [[path: allureResultsDir]],
+        ])
+    }
+
 }
 
 
