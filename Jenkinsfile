@@ -47,7 +47,7 @@ node {
     
 
             sh '. myenv/bin/activate'
-            sh 'sudo -H pip install --upgrade pip'
+            sh 'pip install --user --upgrade pip'
             sh 'pip install --upgrade pip'
            sh 'pip install allure-pytest'
         // Replace with your test execution commands
