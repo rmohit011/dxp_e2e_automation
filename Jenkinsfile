@@ -49,7 +49,7 @@ node {
     }
     // Generate the Allure report
     stage('Generate Allure Report') {
-        docker.image('devopstestlab/pytest-allure:latest').inside {
+        docker.image('sorinsugar/allure-report-generator:latest').inside {
         // Generate the Allure report from the results
         sh "allure generate ${allureResultsDir} -o ${allureReportDir}"
 
@@ -60,6 +60,7 @@ node {
 
     // Publish Allure report using the Allure Jenkins Plugin (optional)
     stage('Publish Allure Report') {
+        d
         allure([
             includeProperties: false,
             jdk: '',
@@ -67,7 +68,8 @@ node {
             reportBuildPolicy: 'ALWAYS',
             results: [[path: allureResultsDir]],
         ])
-    }
+        }
+    
 
 }
 
