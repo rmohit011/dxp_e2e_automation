@@ -54,7 +54,7 @@ node {
         sh "allure generate ${allureResultsDir} -o ${allureReportDir}"
 
         // Archive the Allure report so that it can be accessed in Jenkins
-        archiveArtifacts artifacts: "${allureReportDir}/*", allowEmptyArchive: true
+        archiveArtifacts artifacts: "allure-report/*", allowEmptyArchive: true
     }
     }
 
