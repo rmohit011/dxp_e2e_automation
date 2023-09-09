@@ -43,7 +43,7 @@ node {
     parallel parallelStages
     }
     catch (Exception e) {
-        currentBuild.result = 'UNSTABLE'
+        currentBuild.result = 'FAILURE'
         echo "One or more stages have failed, but the pipeline continues..."
     } finally {
     
