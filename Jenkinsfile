@@ -44,7 +44,7 @@ node {
         docker.image('devopstestlab/pytest-allure:latest').inside {
            
         // Replace with your test execution commands
-        sh 'pytest --alluredir=${allureResultsDir}' // For example, if you're using pytest
+        sh 'pytest test_cml.py --name=${params.stage} --alluredir=${allureResultsDir}' // For example, if you're using pytest
     }
     }
     // Generate the Allure report
