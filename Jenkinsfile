@@ -14,7 +14,8 @@ node {
                 string(defaultValue: '8', description: 'enter no of res', name: 'no_of_res'),
                 string(defaultValue: 'dev', description: 'enter stage name', name: 'stage'),
                 ])])
-              
+    
+    try {          
     def parallelStages = [:]
         stage('SCM') {
             git branch: 'main', url: 'https://github.com/rmohit011/dxp_e2e_automation.git'
@@ -40,6 +41,11 @@ node {
     }
       }
     parallel parallelStages
+    }
+    catch (Exception e) {
+        currentBuild.result = 'UNSTABLE'
+        echo "One or more stages have failed, but the pipeline continues..."
+    } finally {
     
     // Generate the Allure report
     stage('Generate Allure Report') {
@@ -62,7 +68,7 @@ node {
             results: [[path: allureResultsDir]],
         ])
         }
-    
+    } 
 
 }
 
