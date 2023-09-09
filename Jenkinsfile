@@ -36,7 +36,7 @@ node {
         docker.image('devopstestlab/pytest-allure:latest').inside {
             echo "${params.stage}"
             sh "pytest test_pyt.py"
-            sh "pytest test_cml.py --name=${params.stage} --alluredir=${allureResultsDir}"
+            sh "pytest --name=${params.stage} --alluredir=${allureResultsDir}"
         }
     }
       }
