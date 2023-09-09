@@ -31,22 +31,16 @@ node {
         }
       }
       parallelStages['ExecutePytest'] = {
-        stage('ExecutePytest') {
-        docker.image('qnib/pytest:latest').inside {
+        stage('ExecutePytest and Generate allure result') {
+        docker.image('devopstestlab/pytest-allure:latest').inside {
             echo "${params.stage}"
             sh "pytest test_pyt.py"
-            sh "pytest test_cml.py --name=${params.stage}"
+            sh "pytest test_cml.py --name=${params.stage} --alluredir=${allureResultsDir}"
         }
     }
       }
     parallel parallelStages
-    stage('Test and Generate Allure Results') {
-        docker.image('devopstestlab/pytest-allure:latest').inside {
-           
-        // Replace with your test execution commands
-        sh "pytest test_cml.py --name=${params.stage} --alluredir=${allureResultsDir}" // For example, if you're using pytest
-    }
-    }
+    
     // Generate the Allure report
     stage('Generate Allure Report') {
         docker.image('sorinsugar/allure-report-generator:latest').inside {
