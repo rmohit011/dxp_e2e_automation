@@ -60,7 +60,6 @@ node {
 
     // Publish Allure report using the Allure Jenkins Plugin (optional)
     stage('Publish Allure Report') {
-        d
         allure([
             includeProperties: false,
             jdk: '',
