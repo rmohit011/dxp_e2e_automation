@@ -28,6 +28,7 @@ node {
             echo "${params.isActive}"
             echo "${params.date}"
             sh "python test_agrs.py ${params.no_of_res} ${params.isActive} ${params.date}"
+            sh "pip intsall selenium"
             sh "python grid.py"
         }
         }
