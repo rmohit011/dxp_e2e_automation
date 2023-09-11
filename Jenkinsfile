@@ -22,8 +22,7 @@ node {
         }
       parallelStages['ExecutePython'] = {
         stage('ExecutePython') {
-            docker.image('python:3.9.18').inside('-u root') {
-            echo "pass"
+            docker.image('python:3.9.18').inside('-u root') {    // to install any package in container you need to run it as root
             echo "${params.no_of_res}"
             echo "${params.isActive}"
             echo "${params.date}"
