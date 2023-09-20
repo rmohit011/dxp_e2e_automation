@@ -14,7 +14,7 @@ driver = webdriver.Remote(command_executor=hub_url, options=chrome_options)
 
 # Now you can use the 'driver' object to automate the browser
 driver.get("https://www.youtube.com/")
-time.sleep(4)
+time.sleep(10)
 print(driver.title)
 
 # Close the browser when done
