@@ -49,14 +49,14 @@ node {
     
     // Generate the Allure report
     stage('Generate Allure Report') {
-        docker.image('rmohit011/jenkins-venv:1.0').inside {
+      //  docker.image('rmohit011/jenkins-venv:1.0').inside {
         // Generate the Allure report from the results
         sh "allure generate ${allureResultsDir} -o ${allureReportDir}"
 
         // Archive the Allure report so that it can be accessed in Jenkins
         archiveArtifacts artifacts: "allure-report/*", allowEmptyArchive: true
     }
-    }
+    //}
 
     // Publish Allure report using the Allure Jenkins Plugin (optional)
     stage('Publish Allure Report') {
