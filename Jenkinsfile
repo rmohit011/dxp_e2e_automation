@@ -19,6 +19,7 @@ node {
     def parallelStages = [:]
         stage('SCM') {
             git branch: 'main', url: 'https://github.com/rmohit011/dxp_e2e_automation.git'
+            sh "docker build -t jenkins-venv:1.0 ."
         }
       parallelStages['ExecutePython'] = {
         stage('ExecutePython') {
