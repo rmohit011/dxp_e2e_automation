@@ -20,6 +20,7 @@ node {
         stage('SCM') {
             git branch: 'main', url: 'https://github.com/rmohit011/dxp_e2e_automation.git'
             echo "PWD is $PWD"
+            echo "${env.JOB_NAME}"
             sh "docker build -t jenkins-venv:1.0 /var/jenkins_home/workspace/"${env.JOB_NAME}""
         }
       parallelStages['ExecutePython'] = {
