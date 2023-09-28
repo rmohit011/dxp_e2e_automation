@@ -23,7 +23,7 @@ node {
         }
       parallelStages['ExecutePython'] = {
         stage('ExecutePython') {
-            docker.image('jenkins-venv:1.0').inside('-u root') {    // to install any package in container you need to run it as root
+            docker.image('jenkins-venv:1.0'){
             echo "${params.no_of_res}"
             echo "${params.isActive}"
             echo "${params.date}"
@@ -50,7 +50,7 @@ node {
     
     // Generate the Allure report
     stage('Generate Allure Report') {
-        docker.image('sorinsugar/allure-report-generator:latest').inside {
+        docker.image('jenkins-venv:1.0').inside {
         // Generate the Allure report from the results
         sh "allure generate ${allureResultsDir} -o ${allureReportDir}"
 
