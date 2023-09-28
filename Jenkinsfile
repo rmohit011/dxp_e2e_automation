@@ -21,7 +21,8 @@ node {
             git branch: 'main', url: 'https://github.com/rmohit011/dxp_e2e_automation.git'
             echo "PWD is $PWD"
             echo "${env.JOB_NAME}"
-            sh "docker build -t jenkins-venv:1.0 ${workspaceDir}"
+            sh "cd ${workspaceDir}"
+            sh "docker build -t jenkins-venv:1.0 ."
         }
       parallelStages['ExecutePython'] = {
         stage('ExecutePython') {
