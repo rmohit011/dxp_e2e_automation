@@ -19,14 +19,11 @@ node {
     def parallelStages = [:]
         stage('SCM') {
             git branch: 'main', url: 'https://github.com/rmohit011/dxp_e2e_automation.git'
-            echo "PWD is $PWD"
-            echo "${env.JOB_NAME}"
-            sh "cd ${workspaceDir}"
             sh "docker build -t jenkins-venv:1.0 ."
         }
       parallelStages['ExecutePython'] = {
         stage('ExecutePython') {
-            docker.image('rmohit011/jenkins-venv:1.0').inside('-u root') {    // to install any package in container you need to run it as root
+            docker.image('jenkins-venv:1.0').inside('-u root') {    // to install any package in container you need to run it as root
             echo "${params.no_of_res}"
             echo "${params.isActive}"
             echo "${params.date}"
@@ -37,7 +34,7 @@ node {
       }
       parallelStages['ExecutePytest'] = {
         stage('ExecutePytest and Generate allure result') {
-        docker.image('rmohit011/jenkins-venv:1.0').inside {
+        docker.image('jenkins-venv:1.0').inside {
             echo "${params.stage}"
             sh "pytest test_pyt.py"
             sh "pytest --name=${params.stage} --alluredir=${allureResultsDir}"
