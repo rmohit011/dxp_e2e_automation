@@ -50,7 +50,7 @@ node {
     
     // Generate the Allure report
     stage('Generate Allure Report') {
-        docker.image('jenkins-venv:1.0').inside {
+        docker.image('sorinsugar/allure-report-generator:latest').inside {
         // Generate the Allure report from the results
         sh "allure generate ${allureResultsDir} -o ${allureReportDir}"
 
